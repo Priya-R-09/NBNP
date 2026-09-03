@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Tree Encyclopedia | QR Tree Trail</title>
+<meta name="description" content="An interactive digital tree encyclopedia with QR-linked tree information.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <span class="brand-mark">🌿</span>
+    <span><strong>TreeTrail</strong><small>Campus Tree Encyclopedia</small></span>
+  </a>
+  <nav>
+    <a href="#explore">Explore</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">🌱 DIGITAL TREE DISCOVERY • 2025–2026</div>
+    <h1>Meet the trees<br><em>around you.</em></h1>
+    <p>Scan a QR code beside any tree and discover its botanical identity, Tamil name, flowering season, fruiting season and traditional uses — all in one place.</p>
+    <a class="hero-btn" href="#explore">Explore the Tree Collection <span>↓</span></a>
+  </div>
+  <div class="hero-art">
+    <div class="orb"></div>
+    <div class="leaf leaf1">🍃</div><div class="leaf leaf2">🌿</div><div class="leaf leaf3">🍃</div>
+    <div class="tree-illustration">🌳</div>
+    <div class="scan-card"><span>▣</span><div><b>SCAN & DISCOVER</b><small>Every tree has a story</small></div></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div><strong>66</strong><span>Tree Profiles</span></div>
+  <div><strong id="familyCount">—</strong><span>Plant Families</span></div>
+  <div><strong>02</strong><span>Languages</span></div>
+  <div><strong>01</strong><span>QR Trail</span></div>
+</section>
+
+<section id="explore" class="explore">
+  <div class="section-head">
+    <div><span class="eyebrow">THE COLLECTION</span><h2>Explore our trees</h2></div>
+    <p>Search by common name, Tamil name or botanical name.</p>
+  </div>
+  <div class="controls">
+    <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search a tree..."></label>
+    <select id="family"><option value="all">All families</option></select>
+  </div>
+  <div id="grid" class="tree-grid"></div>
+  <p id="empty" class="empty" hidden>No trees match your search.</p>
+</section>
+
+<section id="about" class="about">
+  <div class="about-icon">🌱</div>
+  <div><span class="eyebrow">HOW IT WORKS</span><h2>One tree. One QR. One digital story.</h2>
+  <p>Place a QR signboard beside each tree. Visitors scan it with their phone camera and are taken directly to that tree's profile. This main page acts as the digital gateway to the complete collection.</p></div>
+  <div class="steps"><div><b>01</b><span>Find the tree</span></div><div><b>02</b><span>Scan its QR</span></div><div><b>03</b><span>Discover & learn</span></div></div>
+</section>
+</main>
+
+<footer><div><b>TreeTrail</b> · Campus Tree Encyclopedia</div><div>Built for digital learning & biodiversity awareness</div></footer>
+
+<script>
+const trees = [
+  {
+    "id": 1,
+    "slug": "01-sago-palm",
+    "common": "sago palm",
+    "tamil": "பனைப் பெரணி",
+    "binomial": "Cycas circinalis L.",
+    "family": "Cycadaceae",
+    "flowering": "December to February or May to November",
+    "fruiting": "February-August"
+  },
+  {
+    "id": 2,
+    "slug": "02-alexandrian-laurel",
+    "common": "Alexandrian laurel",
+    "tamil": "புன்னை மரம்",
+    "binomial": "Calophyllum L",
+    "family": "Calophyllaceae",
+    "flowering": "April-June or October-December",
+    "fruiting": "July to September"
+  },
+  {
+    "id": 3,
+    "slug": "03-crocodile-bark-tree",
+    "common": "Crocodile Bark Tree",
+    "tamil": "கருமருது",
+    "binomial": "Terminalia elliptica Willd.",
+    "family": "Combretaceae",
+    "flowering": "April to August",
+    "fruiting": "April to May"
+  },
+  {
+    "id": 4,
+    "slug": "04-indian-ebony",
+    "common": "Indian Ebony",
+    "tamil": "கருங்காலி",
+    "binomial": "Diospyros ebenum J.Koenig",
+    "family": "Ebenaceae",
+    "flowering": "April and May",
+    "fruiting": "September to November"
+  },
+  {
+    "id": 5,
+    "slug": "05-fern-tree",
+    "common": "Fern Tree",
+    "tamil": "ஆதடலி மரம்",
+    "binomial": "Filicium decipiens (Wight & Arn.) Thwaites",
+    "family": "Sapindaceae",
+    "flowering": "October–December, March–May",
+    "fruiting": "October to December"
+  },
+  {
+    "id": 6,
+    "slug": "06-tree-jasmine",
+    "common": "Tree Jasmine",
+    "tamil": "மரமல்லி",
+    "binomial": "Millingtonia hortensis L.f.",
+    "family": "Bignoniaceae",
+    "flowering": "October–December, June to January",
+    "fruiting": "October to December"
+  },
+  {
+    "id": 7,
+    "slug": "07-kamala-tree",
+    "common": "Kamala Tree",
+    "tamil": "செந்தூரம்",
+    "binomial": "Mallotus philippensis (Lam.) Müll.Arg.",
+    "family": "Euphorbiaceae",
+    "flowering": "January to March and June to September.",
+    "fruiting": "January to April or July to August"
+  },
+  {
+    "id": 8,
+    "slug": "08-eastern-silverberry",
+    "common": "Eastern Silverberry",
+    "tamil": "குரங்குப் பழம்",
+    "binomial": "Elaeagnus conferta Roxb.",
+    "family": "Elaeagnaceae",
+    "flowering": "November to December.",
+    "fruiting": "March to April."
+  },
+  {
+    "id": 9,
+    "slug": "09-jangli-almond",
+    "common": "Jangli Almond",
+    "tamil": "மரவெட்டி",
+    "binomial": "Hydnocarpus pentandrus (Buch.-Ham.) Oken",
+    "family": "Achariaceae",
+    "flowering": "January to May",
+    "fruiting": "September to December."
+  },
+  {
+    "id": 10,
+    "slug": "10-bullet-wood",
+    "common": "Bullet wood",
+    "tamil": "மகிழமரம்",
+    "binomial": "Manilkara kauki (L.) Dubard",
+    "family": "Sapotaceae",
+    "flowering": "May-June",
+    "fruiting": "June and October"
+  },
+  {
+    "id": 11,
+    "slug": "11-indian-ebony",
+    "common": "Indian Ebony",
+    "tamil": "வக்கனை",
+    "binomial": "Diospyros samoensis A.Gray",
+    "family": "Ebenaceae",
+    "flowering": "March to July",
+    "fruiting": "May to November"
+  },
+  {
+    "id": 12,
+    "slug": "12-bell-mimosa",
+    "common": "Bell mimosa",
+    "tamil": "விடத்தலை மரம்",
+    "binomial": "Dichrostachys (A.DC.) Wight & Arn.",
+    "family": "Fabaceae",
+    "flowering": "July and August.",
+    "fruiting": "May to September"
+  },
+  {
+    "id": 13,
+    "slug": "13-pink-cedar",
+    "common": "Pink cedar",
+    "tamil": "நெல்றை",
+    "binomial": "Acrocarpus fraxinifolius Wight & Arn.",
+    "family": "Fabaceae",
+    "flowering": "February to May",
+    "fruiting": "July to September"
+  },
+  {
+    "id": 14,
+    "slug": "14-thorny-bamboo",
+    "common": "thorny bamboo",
+    "tamil": "மூங்கில்",
+    "binomial": "Bambusa bambos (L.) Voss",
+    "family": "Poaceae",
+    "flowering": "The cycle for Bambusa bambos is approximately 43–49 years",
+    "fruiting": ""
+  },
+  {
+    "id": 15,
+    "slug": "15-akil",
+    "common": "Akil",
+    "tamil": "அகில்",
+    "binomial": "Dysoxylum gotadhora (Buch.-Ham.) Mabb.",
+    "family": "Meliaceae",
+    "flowering": "March to July",
+    "fruiting": "March to January"
+  },
+  {
+    "id": 16,
+    "slug": "16-rain-tree",
+    "common": "Rain tree",
+    "tamil": "தூங்குமூஞ்சி மரம்",
+    "binomial": "Samanea saman (Jacq.) Merr.",
+    "family": "Fabaceae",
+    "flowering": "March to May",
+    "fruiting": "May to June."
+  },
+  {
+    "id": 17,
+    "slug": "17-kadamba",
+    "common": "kadamba",
+    "tamil": "கடம்பு மரம்",
+    "binomial": "Neolamarckia cadamba (Roxb.) Bosser",
+    "family": "Rubiaceae",
+    "flowering": "June to August",
+    "fruiting": "September to December"
+  },
+  {
+    "id": 18,
+    "slug": "18-pongam-tree",
+    "common": "Pongam Tree",
+    "tamil": "புங்க மரம்",
+    "binomial": "Pongamia pinnata (L.) Pierre",
+    "family": "Fabaceae",
+    "flowering": "April to July",
+    "fruiting": "January to March"
+  },
+  {
+    "id": 19,
+    "slug": "19-venthekku",
+    "common": "Venthekku",
+    "tamil": "வெண்தேக்கு",
+    "binomial": "Lagerstroemia microcarpa Hance",
+    "family": "Lythraceae",
+    "flowering": "June to February",
+    "fruiting": "June to February."
+  },
+  {
+    "id": 20,
+    "slug": "20-wild-almond-tree",
+    "common": "Wild Almond Tree",
+    "tamil": "பீநாறி",
+    "binomial": "Sterculia foetida L.",
+    "family": "Malvaceae",
+    "flowering": "February to May",
+    "fruiting": "March to May"
+  },
+  {
+    "id": 21,
+    "slug": "21-soapnut-tree",
+    "common": "Soapnut Tree",
+    "tamil": "பூந்தி",
+    "binomial": "Sapindus saponaria subsp. Saponaria",
+    "family": "Sapindaceae",
+    "flowering": "November and January",
+    "fruiting": "October to December"
+  },
+  {
+    "id": 22,
+    "slug": "22-white-barked-acacia",
+    "common": "White-Barked Acacia",
+    "tamil": "வெள்வேல்",
+    "binomial": "Acacia leucophloea (Roxb.) Willd.",
+    "family": "Fabaceae",
+    "flowering": "August to October",
+    "fruiting": "April to June"
+  },
+  {
+    "id": 23,
+    "slug": "23-teak",
+    "common": "Teak",
+    "tamil": "தேக்கு",
+    "binomial": "Tectona L.f.",
+    "family": "Lamiaceae",
+    "flowering": "June to August or September",
+    "fruiting": "September to December."
+  },
+  {
+    "id": 24,
+    "slug": "24-indian-kino-tree",
+    "common": "Indian Kino Tree",
+    "tamil": "வேங்கை மரம்",
+    "binomial": "Pterocarpus marsupium Roxb.",
+    "family": "Fabaceae",
+    "flowering": "November to March",
+    "fruiting": "June to December"
+  },
+  {
+    "id": 25,
+    "slug": "25-indian-rosewood",
+    "common": "Indian Rosewood",
+    "tamil": "ஈட்டி மரம்",
+    "binomial": "Dalbergia andapensis Bosser & R.Rabev",
+    "family": "Fabaceae",
+    "flowering": "January to March",
+    "fruiting": "November to February"
+  },
+  {
+    "id": 26,
+    "slug": "26-ceylon-oak",
+    "common": "Ceylon oak",
+    "tamil": "பூவம்",
+    "binomial": "Schleichera oleosa (Lour.) Oken",
+    "family": "Sapindoideae",
+    "flowering": "January to April",
+    "fruiting": "February to August"
+  },
+  {
+    "id": 27,
+    "slug": "27-arappu",
+    "common": "Arappu",
+    "tamil": "அரப்பு",
+    "binomial": "Albizia amara (Roxb.) Boivin",
+    "family": "Fabaceae",
+    "flowering": "February to May",
+    "fruiting": "May to July"
+  },
+  {
+    "id": 28,
+    "slug": "28-jamun",
+    "common": "Jamun",
+    "tamil": "நாவல்",
+    "binomial": "Syzygium cumini (L.) Skeels",
+    "family": "Myrtaceae",
+    "flowering": "March to April",
+    "fruiting": "June to July"
+  },
+  {
+    "id": 29,
+    "slug": "29-mexican-lilac",
+    "common": "Mexican lilac",
+    "tamil": "சீமைக் கிளுவை",
+    "binomial": "Gliricidia sepium (Jacq.) Kunth",
+    "family": "Fabaceae",
+    "flowering": "February to April",
+    "fruiting": "November to March"
+  },
+  {
+    "id": 30,
+    "slug": "30-mulipolavu",
+    "common": "Mulipolavu",
+    "tamil": "வெண்ணாந்தை,முலிபொலவு",
+    "binomial": "Pterospermum reticulatum Wight & Arn.",
+    "family": "Malvaceae",
+    "flowering": "February to April",
+    "fruiting": "March to November"
+  },
+  {
+    "id": 31,
+    "slug": "31-devil-tree",
+    "common": "devil tree",
+    "tamil": "ஏழிலைப்பாலை",
+    "binomial": "Alstonia scholaris (L.) R.Br.",
+    "family": "Apocynaceae",
+    "flowering": "November to December",
+    "fruiting": "May to July."
+  },
+  {
+    "id": 32,
+    "slug": "32-snakewood-tree",
+    "common": "snakewood tree",
+    "tamil": "எட்டி மரம்",
+    "binomial": "Strychnos nux-vomica L.",
+    "family": "Loganiaceae",
+    "flowering": "March to May.",
+    "fruiting": "November to February"
+  },
+  {
+    "id": 33,
+    "slug": "33-peacock-s-foot-tree",
+    "common": "Peacock's foot tree",
+    "tamil": "மயிலாடி",
+    "binomial": "Vitex parviflora A.Juss.",
+    "family": "Lamiaceae",
+    "flowering": "April to May",
+    "fruiting": "July to August or September to January"
+  },
+  {
+    "id": 34,
+    "slug": "34-red-silk-cotton",
+    "common": "Red silk cotton",
+    "tamil": "முள் இலவம்",
+    "binomial": "Bombax L.",
+    "family": "Bombacaceae",
+    "flowering": "January to March/April",
+    "fruiting": "April to June"
+  },
+  {
+    "id": 35,
+    "slug": "35-malabar-tree-of-heaven",
+    "common": "Malabar Tree of Heaven",
+    "tamil": "மட்டிப்பால்",
+    "binomial": "Ailanthus triphysa (Dennst.) Alston",
+    "family": "Simaroubaceae",
+    "flowering": "December to May",
+    "fruiting": "March to April"
+  },
+  {
+    "id": 36,
+    "slug": "36-mahogany",
+    "common": "mahogany",
+    "tamil": "மஹோகனி",
+    "binomial": "Swietenia mahagoni (L.) Jacq.",
+    "family": "Meliaceae",
+    "flowering": "April – June",
+    "fruiting": "October - January"
+  },
+  {
+    "id": 37,
+    "slug": "37-lebbek-tree",
+    "common": "Lebbek tree",
+    "tamil": "வாகை மரம்",
+    "binomial": "Albizia lebbeck (L.) Benth.",
+    "family": "Mimosaceae",
+    "flowering": "April to June or September.",
+    "fruiting": "September–October"
+  },
+  {
+    "id": 38,
+    "slug": "38-sandalwood",
+    "common": "sandalwood",
+    "tamil": "சந்தனம்",
+    "binomial": "Santalum album L.",
+    "family": "Santalaceae",
+    "flowering": "March to April and again from September to October",
+    "fruiting": "September–October and March–April"
+  },
+  {
+    "id": 39,
+    "slug": "39-wild-mangosteen",
+    "common": "Wild Mangosteen",
+    "tamil": "முருகல்",
+    "binomial": "Garcinia indica (Thouars) Choisy",
+    "family": "Clusiaceae.",
+    "flowering": "November to February",
+    "fruiting": "April to June"
+  },
+  {
+    "id": 40,
+    "slug": "40-patri",
+    "common": "Patri",
+    "tamil": "பனிவாகை",
+    "binomial": "Dalbergia lanceolaria subsp. paniculata (Roxb.) Thoth.",
+    "family": "Fabaceae",
+    "flowering": "March",
+    "fruiting": "February to October"
+  },
+  {
+    "id": 41,
+    "slug": "41-flame-of-the-forest",
+    "common": "Flame of the Forest",
+    "tamil": "பொரசு",
+    "binomial": "Butea monosperma (Lam.) Kuntze",
+    "family": "Fabaceae",
+    "flowering": "January to March",
+    "fruiting": "May to June"
+  },
+  {
+    "id": 42,
+    "slug": "42-tulip-wood-tree",
+    "common": "Tulip-Wood Tree",
+    "tamil": "நெய்க்கொட்டை",
+    "binomial": "Harpullia arborea (Blanco) Radlk.",
+    "family": "sapindaceae",
+    "flowering": "October to December",
+    "fruiting": "June to July."
+  },
+  {
+    "id": 43,
+    "slug": "43-malabar-ironwood",
+    "common": "Malabar Ironwood",
+    "tamil": "இருபகம்",
+    "binomial": "Hopea parviflora Bedd.",
+    "family": "Dipterocarpaceae",
+    "flowering": "January to March",
+    "fruiting": "January and June"
+  },
+  {
+    "id": 44,
+    "slug": "44-indian-butter-tree",
+    "common": "Indian Butter Tree",
+    "tamil": "இலுப்பை",
+    "binomial": "Madhuca longifolia (L.) J.F.Macbr.",
+    "family": "Sapotaceae",
+    "flowering": "February to April",
+    "fruiting": "August to September"
+  },
+  {
+    "id": 45,
+    "slug": "45-arjuna-tree",
+    "common": "Arjuna tree",
+    "tamil": "நீர்மருது",
+    "binomial": "Terminalia arjuna (Roxb. ex DC.) Wight & Arn.",
+    "family": "Combretaceae",
+    "flowering": "April to July",
+    "fruiting": "November to March"
+  },
+  {
+    "id": 46,
+    "slug": "46-fishtail-palm",
+    "common": "fishtail palm",
+    "tamil": "கூந்தற்பனை",
+    "binomial": "Caryota urens L.",
+    "family": "Arecaceae.",
+    "flowering": "January to April",
+    "fruiting": "December and August"
+  },
+  {
+    "id": 47,
+    "slug": "47-bedda-nut-tree",
+    "common": "Bedda nut tree",
+    "tamil": "தான்றிக்காய்",
+    "binomial": "Terminalia bellirica (Gaertn.) Roxb.",
+    "family": "Combretaceae",
+    "flowering": "February to April.",
+    "fruiting": "November to February or December to March"
+  },
+  {
+    "id": 48,
+    "slug": "48-dragon-eye",
+    "common": "Dragon Eye",
+    "tamil": "செம்பூவம்",
+    "binomial": "Dimocarpus longan Lour.",
+    "family": "Sapindaceae",
+    "flowering": "April-May",
+    "fruiting": "July-September"
+  },
+  {
+    "id": 49,
+    "slug": "49-black-dammar",
+    "common": "Black Dammar",
+    "tamil": "கருங்குங்கிலியம்",
+    "binomial": "Canarium strictum Roxb.",
+    "family": "Burseraceae",
+    "flowering": "November and January",
+    "fruiting": "February to April"
+  },
+  {
+    "id": 50,
+    "slug": "50-spinous-kino",
+    "common": "Spinous Kino",
+    "tamil": "முள்வேங்கை",
+    "binomial": "Bridelia retusa (L.) A.Juss.",
+    "family": "Phyllanthaceae",
+    "flowering": "May to August",
+    "fruiting": "January to February"
+  },
+  {
+    "id": 51,
+    "slug": "51-sandpaper-tree",
+    "common": "Sandpaper Tree",
+    "tamil": "பராய்",
+    "binomial": "Streblus asper Lour.",
+    "family": "Moraceae",
+    "flowering": "January to March and again from July to September",
+    "fruiting": "April to June."
+  },
+  {
+    "id": 52,
+    "slug": "52-bidi-leaf-tree",
+    "common": "Bidi Leaf Tree",
+    "tamil": "ஆத்தி",
+    "binomial": "Bauhinia racemosa Lam.",
+    "family": "Fabaceae",
+    "flowering": "February to May/June",
+    "fruiting": "November and December."
+  },
+  {
+    "id": 53,
+    "slug": "53-manoranjini",
+    "common": "Manoranjini",
+    "tamil": "மனோரஞ்சிதம்",
+    "binomial": "Artabotrys hexapetalus (L.f.) Bhandari",
+    "family": "Annonaceae",
+    "flowering": "April to August/September",
+    "fruiting": "September to February"
+  },
+  {
+    "id": 54,
+    "slug": "54-golden-shower-tree",
+    "common": "Golden Shower Tree",
+    "tamil": "சரக்கொன்றை",
+    "binomial": "Cassia fistula L.",
+    "family": "Fabaceae",
+    "flowering": "April to June.",
+    "fruiting": "December to April"
+  },
+  {
+    "id": 55,
+    "slug": "55-common-indian-linden",
+    "common": "Common Indian Linden",
+    "tamil": "தடசு",
+    "binomial": "Grewia tiliifolia A.Rich.",
+    "family": "Malvaceae",
+    "flowering": "February to June",
+    "fruiting": "July-September"
+  },
+  {
+    "id": 56,
+    "slug": "56-burma-ironwood",
+    "common": "Burma Ironwood",
+    "tamil": "இருள் மரம்",
+    "binomial": "Asparagus racemosus Willd. (Xylia xylocarpa.)",
+    "family": "Fabaceae",
+    "flowering": "March to May",
+    "fruiting": "December to July"
+  },
+  {
+    "id": 57,
+    "slug": "57-soursop",
+    "common": "Soursop",
+    "tamil": "முள் சீதா",
+    "binomial": "Annona Muricata L.",
+    "family": "Annonaceae",
+    "flowering": "almost year-round",
+    "fruiting": "late summer (July-September),winter (December-February)"
+  },
+  {
+    "id": 58,
+    "slug": "58-indian-plum",
+    "common": "Indian Plum",
+    "tamil": "இலந்தை",
+    "binomial": "Ziziphus mauritiana Lam.",
+    "family": "Rhamnaceae",
+    "flowering": "September to November",
+    "fruiting": "October/November,March/April"
+  },
+  {
+    "id": 59,
+    "slug": "59-mon-jack",
+    "common": "Mon-jack",
+    "tamil": "இராப்பலா",
+    "binomial": "Artocarpus gomezianus Wall. ex Trécul.",
+    "family": "Moraceae",
+    "flowering": "March to June.",
+    "fruiting": "June to August"
+  },
+  {
+    "id": 60,
+    "slug": "60-indian-mahogany-red-cedar",
+    "common": "Indian mahogany, Red cedar",
+    "tamil": "சந்தன வேம்பு",
+    "binomial": "Toona M.Roem. (Toona ciliata )",
+    "family": "Meliaceae",
+    "flowering": "February to May",
+    "fruiting": "February and May"
+  },
+  {
+    "id": 61,
+    "slug": "61-wild-jackfruit",
+    "common": "Wild Jackfruit",
+    "tamil": "அயனிப்பலா",
+    "binomial": "Artocarpus hirsutus Lam.",
+    "family": "Moraceae",
+    "flowering": "December to March.",
+    "fruiting": "May and June"
+  },
+  {
+    "id": 62,
+    "slug": "62-white-fig",
+    "common": "White Fig",
+    "tamil": "மலை-இச்சி",
+    "binomial": "Ficus virens Aiton.",
+    "family": "Moraceae",
+    "flowering": "February to May",
+    "fruiting": "December and March"
+  },
+  {
+    "id": 63,
+    "slug": "63-velvet-seed-tree",
+    "common": "Velvet Seed Tree",
+    "tamil": "கருமுத்து மரம்",
+    "binomial": "Majidea zanguebarica Kirk ex Oliv.",
+    "family": "Sapindaceae",
+    "flowering": "January to June",
+    "fruiting": "January to June"
+  },
+  {
+    "id": 64,
+    "slug": "64-star-apple",
+    "common": "Star apple",
+    "tamil": "நுங்கு ஆப்பிள்",
+    "binomial": "Chrysophyllum cainito L.",
+    "family": "Sapotaceae",
+    "flowering": "July to September/October",
+    "fruiting": "December and March or April."
+  },
+  {
+    "id": 65,
+    "slug": "65-banyan-tree",
+    "common": "Banyan Tree",
+    "tamil": "ஆலமரம்",
+    "binomial": "Ficus benghalensis L.",
+    "family": "Moraceae",
+    "flowering": "March to April.",
+    "fruiting": "March to May"
+  },
+  {
+    "id": 66,
+    "slug": "66-peepal-tree",
+    "common": "Peepal tree",
+    "tamil": "அரசமரம்",
+    "binomial": "Ficus religiosa Forssk.",
+    "family": "Moraceae",
+    "flowering": "November and February",
+    "fruiting": "March to May"
+  }
+];
+const grid=document.getElementById('grid'), search=document.getElementById('search'), family=document.getElementById('family'), empty=document.getElementById('empty');
+
+const families=[...new Set(trees.map(t=>t.family))].sort();
+document.getElementById('familyCount').textContent=families.length;
+families.forEach(f=>family.insertAdjacentHTML('beforeend', `<option value="${f}">${f}</option>`));
+
+function card(t) {
+  return `<article class="tree-card">
+    <div class="card-top"><span class="number">${String(t.id).padStart(2,'0')}</span><span class="family-pill">${t.family}</span></div>
+    <div class="tree-symbol">🌳</div>
+    <div class="card-body">
+      <h3>${t.common}</h3><div class="tamil">${t.tamil}</div>
+      <p class="scientific">${t.binomial}</p>
+      <div class="mini"><span>🌸 ${t.flowering}</span><span>🍒 ${t.fruiting}</span></div>
+      <a class="view" href="trees/${t.slug}.html">View tree profile <span>→</span></a>
+    </div>
+  </article>`;
+}
+
+function render(){
+ const q=search.value.toLowerCase().trim(), f=family.value;
+ const result=trees.filter(t=>(f==='all'||t.family===f) && [t.common,t.tamil,t.binomial,t.family].join(' ').toLowerCase().includes(q));
+ grid.innerHTML=result.map(card).join('');
+ empty.hidden=result.length!==0;
+}
+search.addEventListener('input',render); family.addEventListener('change',render); render();
+</script>
+</body>
+</html>
