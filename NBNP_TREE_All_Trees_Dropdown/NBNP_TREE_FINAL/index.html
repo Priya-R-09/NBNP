@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBNP TREE | Digital Botanical Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <span class="brand-icon">❧</span>
+    <span><b>NBNP TREE</b><small>Digital Botanical Explorer</small></span>
+  </a>
+  <nav>
+    <a class="active" href="index.html">Home</a>
+    <div class="directory-wrap">
+      <button id="directoryBtn" class="directory-btn">Tree Directory <span>⌄</span></button>
+      <div id="directoryPanel" class="directory-panel">
+        <div class="panel-title">Tree Directory <small>66 documented species</small></div>
+        <input id="treeSearch" type="search" placeholder="Search by tree name, botanical name, family or Tamil name..." autocomplete="off">
+        <div id="treeList" class="tree-list"></div>
+      </div>
+    </div>
+    <a href="#about">About</a>
+  </nav>
+  <a class="header-cta" href="#choose">Explore <span>↗</span></a>
+</header>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="eyebrow">✦ NBNP TREE / BOTANICAL ARCHIVE</div>
+    <h1>Discover the<br><em>Stories of Trees.</em></h1>
+    <p>Explore the identity, seasonal cycles and traditional knowledge of the trees that shape our green surroundings.</p>
+    <div class="hero-actions">
+      <a href="#choose" class="primary">Choose a Tree <span>→</span></a>
+      <a href="#about" class="secondary">Learn More</a>
+    </div>
+    <div class="stats">
+      <div><b>66</b><span>Tree Species</span></div>
+      <div><b>02</b><span>Languages</span></div>
+      <div><b>01</b><span>Digital Archive</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL TO EXPLORE <span>↓</span></div>
+</section>
+
+<section id="about" class="section about">
+  <div class="section-no">01 / ABOUT</div>
+  <div class="about-grid">
+    <h2>A digital window into our <em>green heritage.</em></h2>
+    <div>
+      <p>NBNP TREE brings the information of 66 documented tree species into one simple digital space. Use the Tree Directory to find a tree and open its dedicated information page.</p>
+      <div class="feature-line"><span>✦</span> Botanical identity &nbsp;•&nbsp; Seasonal information &nbsp;•&nbsp; English & Tamil details</div>
+    </div>
+  </div>
+</section>
+
+<section id="choose" class="section choose">
+  <div class="choose-head">
+    <div><div class="section-no">02 / TREE DIRECTORY</div><h2>Choose a <em>tree.</em></h2><p>Search all 66 trees from one dropdown.</p></div>
+    <div class="species-count"><b>66</b><span>documented<br>species</span></div>
+  </div>
+  <div class="big-select">
+    <label for="treeSelect">Search and select a tree</label>
+    <div class="select-row">
+      <select id="treeSelect"><option value="">Select a tree from the collection...</option></select>
+      <button id="openSelected" class="open-btn">Open Information <span>→</span></button>
+    </div>
+  </div>
+  <div class="directory-note"><span>✦</span> Tip: Use <strong>Tree Directory</strong> in the top menu to search by common, botanical, family or Tamil name.</div>
+</section>
+
+<section class="quote-section">
+  <div class="leaf-decor">❧</div>
+  <h2>Every tree is more than a plant.<br>It is part of a <em>living story.</em></h2>
+</section>
+
+<footer><div><b>NBNP TREE</b><small>Digital Botanical Explorer</small></div><span>Botanical knowledge • Traditional information • Green heritage</span></footer>
+<script src="data.js"></script><script src="app.js"></script>
+</body>
+</html>
