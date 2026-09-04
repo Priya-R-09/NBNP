@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBNP TREE | Digital Botanical Explorer</title>
+  <meta name="description" content="NBNP TREE - a digital botanical explorer documenting 66 campus tree species.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Noto+Sans+Tamil:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">✦</span>
+      <span>
+        <strong>NBNP TREE</strong>
+        <small>Digital Botanical Explorer</small>
+      </span>
+    </a>
+
+    <nav class="main-nav">
+      <a class="active" href="index.html">Home</a>
+
+      <div class="tree-menu">
+        <button class="tree-menu-btn" type="button">
+          Tree Directory <span>⌄</span>
+        </button>
+        <div class="tree-dropdown">
+          <div class="dropdown-top">
+            <strong>66 Tree Species</strong>
+            <span>Choose a tree</span>
+          </div>
+          <input id="treeSearch" type="search" placeholder="Search tree name...">
+          <div id="treeList" class="tree-list"></div>
+        </div>
+      </div>
+
+      <a href="#about">About</a>
+      <a href="#collection">Collection</a>
+    </nav>
+
+    <a class="header-btn" href="#collection">Explore Trees <span>→</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div class="eyebrow">NBNP TREE / CAMPUS BOTANICAL ARCHIVE</div>
+        <h1>Discover the<br><em>Stories of Trees.</em></h1>
+        <p>
+          Explore the botanical identity, seasonal cycles, traditional
+          knowledge and cultural value of trees through a digital collection.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-btn" href="#collection">Explore Collection <span>↗</span></a>
+          <a class="secondary-btn" href="#about">Learn About NBNP</a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <strong>66</strong>
+            <span>Tree Species</span>
+          </div>
+          <div>
+            <strong>02</strong>
+            <span>Languages</span>
+          </div>
+          <div>
+            <strong>01</strong>
+            <span>Digital Archive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-note">
+        <span></span>
+        Scroll to explore
+      </div>
+    </section>
+
+    <section class="intro section" id="about">
+      <div class="section-label">01 / ABOUT</div>
+      <div class="intro-grid">
+        <div>
+          <h2>A digital window<br>into our <em>green heritage.</em></h2>
+        </div>
+        <div>
+          <p>
+            NBNP TREE is a digital tree collection designed to make botanical
+            information simple, accessible and engaging. Select any species
+            from the Tree Directory to open its complete information page.
+          </p>
+          <a class="text-link" href="#collection">View the collection →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="collection section" id="collection">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">02 / COLLECTION</div>
+          <h2>Explore the <em>trees.</em></h2>
+        </div>
+        <div class="collection-count">
+          <strong>66</strong>
+          <span>documented species</span>
+        </div>
+      </div>
+
+      <div class="collection-toolbar">
+        <input id="collectionSearch" type="search" placeholder="Search by common, botanical, family or Tamil name...">
+        <select id="familyFilter">
+          <option value="">All families</option>
+        </select>
+      </div>
+
+      <div id="treeCards" class="tree-grid"></div>
+    </section>
+
+    <section class="statement">
+      <div class="statement-inner">
+        <span class="quote-mark">“</span>
+        <h2>Every tree is more than a plant.<br>It is a part of a <em>living story.</em></h2>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>NBNP TREE</strong>
+      <span>Digital Botanical Explorer</span>
+    </div>
+    <p>Botanical knowledge • Traditional information • Green heritage</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
